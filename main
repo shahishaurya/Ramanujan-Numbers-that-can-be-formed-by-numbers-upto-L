@@ -1,0 +1,23 @@
+from array import *
+import time
+def ramanujan_On2(limit):
+	cubes = array('i', [])
+	dict_sum_pairs = dict()
+	dict_ramnujan_nums = dict()
+	sum_pairs = 0
+	for i in range(0, limit):
+		cubes.append(i ** 3)
+	for a in range(0, limit):
+		for b in range(a + 1, limit):
+			a3, b3 = cubes[a], cubes[b]
+			sum_pairs = a3 + b3
+			if sum_pairs in dict_sum_pairs:
+				c, d = dict_sum_pairs.get(sum_pairs)
+				dict_ramnujan_nums[sum_pairs] = a, b, c, d
+			else:
+				dict_sum_pairs[sum_pairs] = a, b
+	return dict_ramnujan_nums
+L = int(input("Give the range for ramanujan sum: "))
+r_dict = ramanujan_On2(L)
+for d in sorted(r_dict):
+	print(f'{d}: {r_dict[d]}', end ='\n')
